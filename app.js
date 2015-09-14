@@ -7,17 +7,17 @@ db.serialize(function () {
   //firstName(txt), lastName(txt), email(txt), phone(num), address(number(txt), street(txt) apt#(txt), city(txt), zip(txt)), birthday(txt)
 
 
-  // db.run('DROP TABLE Favorites');
+  // db.run('DROP TABLE Donor');
 
-  db.run('CREATE TABLE Favorites (FavoriteID integer primary key not null, CategoryID integer not null)');
-  db.run('INSERT INTO Favorites(FavoriteID, CategoryID) VALUES(1, 2)');
-  db.run('INSERT INTO Favorites(CategoryID) VALUES(4)');
-  db.run('INSERT INTO Favorites(CategoryID) VALUES(6)');
-  db.run('INSERT INTO Favorites(CategoryID) VALUES(8)');
+  // db.run('CREATE TABLE Donor (PrimaryID integer primary key not null, FirstName text not null)');
+  db.run('INSERT INTO Donor(PrimaryID, FirstName) VALUES(1, "John")');
+  db.run('INSERT INTO Donor(FirstName) VALUES("Tim")');
+  db.run('INSERT INTO Donor(FirstName) VALUES("Phil")');
+  db.run('INSERT INTO Donor(FirstName) VALUES("Greg")');
 
 
-  db.each('SELECT * FROM Favorites', function(err, row) {
-    console.log('FavoriteID: ' + row.FavoriteID, 'CategoryID: ' + row.CategoryID);
+  db.each('SELECT * FROM Donor', function(err, row) {
+    console.log('PrimaryID: ' + row.PrimaryID, 'FirstName: ' + row.FirstName);
 
   })
 
