@@ -13,18 +13,16 @@ app.get('/', function (req, res) {
 
    db.serialize(function() {
     db.all('SELECT * FROM Donor', function(err, rows) {
-
+      var arr = [];
       console.log(rows);
       console.log(rows.length);
-      // res.render('index', { title: rows.PrimaryID, message: rows.FirstName });
+      res.render('index', { title: rows[0].PrimaryID, message: rows[0].FirstName, data: rows });
 
+        // res.send(rows)
 
+      // for (i=0;i<rows.length;i++) {
 
-
-
-
-        res.send(rows)
-
+      // }
 
    });
   })
