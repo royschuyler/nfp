@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
       var arr = [];
       console.log(rows);
       console.log(rows.length);
-      res.render('index', { title: rows[0].PrimaryID, message: rows[0].FirstName, data: rows });
+      res.render('index2', { title: rows[0].PrimaryID, message: rows[0].FirstName, data: rows });
 
         // res.send(rows)
 
