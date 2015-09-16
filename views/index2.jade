@@ -1,11 +1,13 @@
 doctype html
 html
   body
-    -var i = data
-each value in i
-    table
+    table(style='width:100%')
+      -var i = data
+      each value in i
         tr
           td=value.PrimaryID
           td=value.FirstName
+          td=value.LastName
+          td=value.email
 
 
