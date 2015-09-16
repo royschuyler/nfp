@@ -16,17 +16,10 @@ app.get('/', function (req, res) {
       var arr = [];
       console.log(rows);
       console.log(rows.length);
-      res.render('index2', { title: rows[0].PrimaryID, message: rows[0].FirstName, data: rows });
-
-        // res.send(rows)
-
-      // for (i=0;i<rows.length;i++) {
-
-      // }
-
+      res.render('index2', { data: rows });
    });
-  })
- })
+  });
+ });
 
 app.listen(3000);
 
