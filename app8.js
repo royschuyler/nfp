@@ -1,15 +1,21 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser')
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('Tester3');
 
 app.set('view engine', 'jade');
 
+
 app.get('/', function (req, res) {
 
    db.serialize(function() {
-
 
     db.run('DROP TABLE Donor');
 
@@ -19,10 +25,6 @@ app.get('/', function (req, res) {
     db.run('INSERT INTO Donor(FirstName, LastName, email) VALUES("Phil", "Resurrected", "philmun@phlaker.com")');
     db.run('INSERT INTO Donor(FirstName, LastName, email) VALUES("Greg", "Phaulstein", "maude@lebski.com")');
 
-
-
-
-
     db.all('SELECT * FROM Donor', function(err, rows) {
       var arr = [];
       console.log(rows);
@@ -31,6 +33,11 @@ app.get('/', function (req, res) {
    });
   });
  });
+
+app.all('/signup', function(req,res){
+  res.render('signup')
+  console.log(req.body);
+})
 
 app.listen(3000);
 
