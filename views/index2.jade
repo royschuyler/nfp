@@ -2,6 +2,12 @@ doctype html
 html
   body
     table(style='width:100%')
+      thead
+        th ID
+        th First Name
+        th Last Name
+        th email
+      tbody
       -var i = data
       each value in i
         tr
