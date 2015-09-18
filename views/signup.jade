@@ -2,6 +2,12 @@ doctype html
 html
   body
     div
+      a(href='signup') Add new donor
+    div
+      a(href='/') List all donors
+    div
+      a(href='search') Search donor
+    div
       h1 Add Donor
       form(action='/signup',method='post')
         div(data-role='fieldcontain')
