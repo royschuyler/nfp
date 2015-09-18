@@ -11,6 +11,7 @@ var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('Tester3');
 
 app.set('view engine', 'jade');
+app.use(express.static('www'));
 
 //--------------------------------------------------------------------------------------------
 
