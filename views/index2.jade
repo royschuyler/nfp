@@ -19,9 +19,13 @@ html
       each value in i
         tr
           td=value.PrimaryID
-          td=value.FirstName
-          td=value.LastName
-          td=value.email
-          td=value.Affiliation
+          td
+            a(href=value.LastName) #{value.FirstName}
+          td
+            a(href=value.LastName) #{value.LastName}
+          td
+            a(href=value.LastName) #{value.email}
+          td
+            a(href=value.Affiliation) #{value.Affiliation}
 
 
