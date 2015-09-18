@@ -13,6 +13,8 @@ var db = new sqlite3.Database('Tester3');
 app.set('view engine', 'jade');
 app.use(express.static('www'));
 
+
+
 //--------------------------------------------------------------------------------------------
 
 app.get('/home', function (req, res) {
@@ -54,13 +56,28 @@ app.get('/', function(req, res) {
 
 app.get('/:id', function (req, res) {
   var pass = req.params.id;
-  console.log(pass)
 
-  db.all('SELECT * FROM Donor WHERE LastName=' + "'" + pass + "'", function (err, rows) {
-    res.render('name', {name: pass, data: rows})
-    console.log(rows)
+  db.all('SELECT * FROM Donor WHERE PrimaryID=' + "'" + pass + "'", function (err, rows) {
+    res.render('name', {name: pass, data: rows});
   });
+
+  app.post('/:id', function (req, res) {
+
+  console.log(pass);
+
+  if (req.body.date) {
+      console.log(req.body)
+      db.run('INSERT INTO Donation(PrimaryID, Date, amount, method) VALUES(' + pass  + ',' + '"' + req.body.date + '"' + ',' +  req.body.amount + ',' + '"' +  req.body.method + '"' + ')');
+    };
+    res.redirect('/')
 });
+
+});
+
+//----------------------------------------------------------------------------------------------
+
+
+
 
 //---------------------------------------------------------------------------------------------
 

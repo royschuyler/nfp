@@ -10,6 +10,22 @@ html
     div
       a(href='search') Search donor
     h1 #{name}
+    h2 Add Donation?
+    form(action='/name',method='post')
+        div(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='date') date
+               input(id='date',type='text',value='',placeholder='10/27/1981',name='date')
+        div#passworddiv(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='amount') amount
+               input(id='amount',type='text',value='',placeholder='100.00',name='amount')
+        div(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='method') method of payment
+               input(id='method',type='text',value='',placeholder='check',name='method')
+        div(data-role='fieldcontain')
+          input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
     table(style='width:100%')
       thead
         th ID
@@ -23,10 +39,10 @@ html
         tr
           td=value.PrimaryID
           td
-            a(href=value.LastName) #{value.FirstName}
+            a(href=value.PrimaryID) #{value.FirstName}
           td
-            a(href=value.LastName) #{value.LastName}
+            a(href=value.PrimaryID) #{value.LastName}
           td
-            a(href=value.LastName) #{value.email}
+            a(href=value.PrimaryID) #{value.email}
           td
-            a(href=value.Affiliation) #{value.Affiliation}
+            a(href=value.PrimaryID) #{value.Affiliation}
