@@ -85,7 +85,7 @@ app.get('/:id', function (req, res) {
 
   if (req.body.date) {
       console.log(req.body)
-      db.run('INSERT INTO Donation(PrimaryID, Date, amount, method) VALUES(' + pass  + ',' + '"' + req.body.date + '"' + ',' +  req.body.amount + ',' + '"' +  req.body.method + '"' + ')');
+      db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + pass  + ',' + '"' + req.body.date + '"' + ',' +  req.body.amount + ',' + '"' +  req.body.method + '"' + ')');
     };
     res.redirect('/')
 });
