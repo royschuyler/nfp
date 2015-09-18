@@ -22,10 +22,16 @@ app.get('/home', function (req, res) {
 
 app.get('/search', function (req, res) {
   res.render('search')
-})
+
+});
 
 //--------------------------------------------------------------------------------------------
+app.post('/search', function (req, res) {
 
+
+
+  res.redirect('/search')
+});
 
 
 //--------------------------------------------------------------------------------------------
@@ -35,9 +41,6 @@ app.get('/', function(req, res) {
   db.serialize(function() {
 
     db.all('SELECT * FROM Donor', function(err, rows) {
-      var arr = [];
-      console.log(rows);
-      console.log(rows.length);
       res.render('index2', {
         data: rows
       });
@@ -52,12 +55,10 @@ app.get('/signup', function (req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  console.log(req.body);
-  console.log(req.body.lname)
 
   db.serialize(function() {
     if (req.body.lname) {
-      db.run('INSERT INTO Donor(FirstName, LastName, email) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ')');
+      db.run('INSERT INTO Donor(FirstName, LastName, email, Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ',' + "'" + req.body.affiliation + "'" + ')');
     };
   });
   res.redirect('/')
