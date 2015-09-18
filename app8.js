@@ -54,6 +54,24 @@ app.get('/', function(req, res) {
 
 //---------------------------------------------------------------------------------------------
 
+app.get('/signup', function (req, res) {
+  res.render('signup')
+});
+
+app.post('/signup', function(req, res) {
+
+  db.serialize(function() {
+    if (req.body.lname) {
+      db.run('INSERT INTO Donor(FirstName, LastName, email, Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ',' + "'" + req.body.affiliation + "'" + ')');
+    };
+  });
+  res.redirect('/')
+});
+
+
+
+//----------------------------------------------------------------------------------------------
+
 app.get('/:id', function (req, res) {
   var pass = req.params.id;
 
@@ -74,26 +92,11 @@ app.get('/:id', function (req, res) {
 
 });
 
-//----------------------------------------------------------------------------------------------
-
-
 
 
 //---------------------------------------------------------------------------------------------
 
-app.get('/signup', function (req, res) {
-  res.render('signup')
-});
 
-app.post('/signup', function(req, res) {
-
-  db.serialize(function() {
-    if (req.body.lname) {
-      db.run('INSERT INTO Donor(FirstName, LastName, email, Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ',' + "'" + req.body.affiliation + "'" + ')');
-    };
-  });
-  res.redirect('/')
-});
 
 //-----------------------------------------------------------------------------------------------
 
