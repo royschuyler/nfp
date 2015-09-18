@@ -2,20 +2,19 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
-
 
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('Tester3');
 
 app.set('view engine', 'jade');
 
+app.get('/', function(req, res) {
 
-app.get('/', function (req, res) {
-
-   db.serialize(function() {
+  db.serialize(function() {
 
     // db.run('DROP TABLE Donor');
 
@@ -29,25 +28,30 @@ app.get('/', function (req, res) {
       var arr = [];
       console.log(rows);
       console.log(rows.length);
-      res.render('index2', { data: rows });
-   });
+      res.render('index2', {
+        data: rows
+      });
+    });
   });
- });
+});
 
-app.all('/signup', function(req,res){
+app.get('/signup', function (req, res) {
   res.render('signup')
+});
+
+app.post('/signup', function(req, res) {
+  // res.render('signup')
   console.log(req.body);
   console.log(req.body.lname)
-   db.serialize(function() {
 
-
-     db.run('INSERT INTO Donor(FirstName, LastName, email) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ')');
-
-
-});
+  db.serialize(function() {
+    if (req.body.lname) {
+      db.run('INSERT INTO Donor(FirstName, LastName, email) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ')');
+    };
+  });
+  res.redirect('/')
 });
 
 app.listen(3000);
-
 
 

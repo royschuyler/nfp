@@ -2,23 +2,20 @@ doctype html
 html
   body
     div
+      h1 Add Donor
       form(action='/signup',method='post')
         div(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
-            label(for='fname') fname
-               input(id='fname',type='text',value='',placeholder='fname',name='fname')
+            label(for='fname') first name
+               input(id='fname',type='text',value='',placeholder='',name='fname')
         div#passworddiv(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
-            label(for='lname') lname
+            label(for='lname') last name
                input(id='lname',type='lname',value='',placeholder='',name='lname')
         div(id='hiddendiv',data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='email') email
                input(id='email',type='text',value='',placeholder='',name='email')
         div(data-role='fieldcontain')
-          fieldset(data-type='vertical', data-role='controlgroup')
-           label(for='showpass') show password
-           input(id='showpass',type='checkbox')
-        div(data-role='fieldcontain')
-          input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')
+          input(type='submit',value='Add',data-transition='fade', data-theme='c')
 
