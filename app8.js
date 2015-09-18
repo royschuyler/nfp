@@ -36,6 +36,7 @@ app.post('/search', function (req, res) {
 
 //--------------------------------------------------------------------------------------------
 
+
 app.get('/', function(req, res) {
 
   db.serialize(function() {
@@ -47,6 +48,12 @@ app.get('/', function(req, res) {
     });
   });
 });
+
+app.get('/:id', function (req, res) {
+  res.render('name')
+  var pass = req.params.id;
+  console.log(pass)
+})
 
 //---------------------------------------------------------------------------------------------
 
