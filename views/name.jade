@@ -1,10 +1,30 @@
 doctype html
 html
   body
-    h1 #{name}
     div
       a(href='signup') Add new donor
     div
       a(href='/') List all donors
     div
       a(href='search') Search donor
+    h1 #{name}
+    table(style='width:100%')
+      thead
+        th ID
+        th First Name
+        th Last Name
+        th email
+        th Affiliation
+      tbody
+      -var i = data
+      each value in i
+        tr
+          td=value.PrimaryID
+          td
+            a(href=value.LastName) #{value.FirstName}
+          td
+            a(href=value.LastName) #{value.LastName}
+          td
+            a(href=value.LastName) #{value.email}
+          td
+            a(href=value.Affiliation) #{value.Affiliation}

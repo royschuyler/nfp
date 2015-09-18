@@ -52,15 +52,13 @@ app.get('/', function(req, res) {
 //---------------------------------------------------------------------------------------------
 
 app.get('/:id', function (req, res) {
-  // res.render('name')
   var pass = req.params.id;
   console.log(pass)
-  // res.render('name', {name: pass})
 
-    db.all('SELECT * FROM Donor WHERE LastName=' + "'" + pass + "'", function (err, rows) {
-      res.render('name', {name: pass})
-      console.log(rows)
-    });
+  db.all('SELECT * FROM Donor WHERE LastName=' + "'" + pass + "'", function (err, rows) {
+    res.render('name', {name: pass, data: rows})
+    console.log(rows)
+  });
 });
 
 //---------------------------------------------------------------------------------------------
