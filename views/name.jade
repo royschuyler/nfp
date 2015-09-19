@@ -46,3 +46,18 @@ html
             a(href=value.PrimaryID) #{value.email}
           td
             a(href=value.PrimaryID) #{value.Affiliation}
+    table(style='width:100%')
+      thead
+        th ID
+        th Date of Donation
+        th Amount of Donation
+        th Method of Donation
+      tbody
+      -var i = data
+      each value in i
+        tr
+          td #{value.DonorID}
+          td #{value.Date}
+          td #{value.amount}
+          td #{value.method}
+

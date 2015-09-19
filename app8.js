@@ -13,32 +13,26 @@ var db = new sqlite3.Database('Tester3');
 app.set('view engine', 'jade');
 app.use(express.static('www'));
 
-
-
 //--------------------------------------------------------------------------------------------
 
-app.get('/home', function (req, res) {
+app.get('/home', function(req, res) {
   res.render('home');
 });
 
 //--------------------------------------------------------------------------------------------
 
-app.get('/search', function (req, res) {
+app.get('/search', function(req, res) {
   res.render('search')
 
 });
 
 //--------------------------------------------------------------------------------------------
-app.post('/search', function (req, res) {
-
-
+app.post('/search', function(req, res) {
 
   res.redirect('/search')
 });
 
-
 //--------------------------------------------------------------------------------------------
-
 
 app.get('/', function(req, res) {
 
@@ -54,7 +48,7 @@ app.get('/', function(req, res) {
 
 //---------------------------------------------------------------------------------------------
 
-app.get('/signup', function (req, res) {
+app.get('/signup', function(req, res) {
   res.render('signup')
 });
 
@@ -68,38 +62,51 @@ app.post('/signup', function(req, res) {
   res.redirect('/')
 });
 
-
-
 //----------------------------------------------------------------------------------------------
 
-app.get('/:id', function (req, res) {
+app.get('/:id', function(req, res) {
   var pass = req.params.id;
 
-  db.all('SELECT * FROM Donor WHERE PrimaryID=' + "'" + pass + "'", function (err, rows) {
-    res.render('name', {name: pass, data: rows});
-  });
+  db.serialize(function() {
+  db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID', function(err, rows) {
+    res.render('name', {
+      name: pass,
+      data: rows
+    });
+ });
 
-  app.post('/:id', function (req, res) {
 
-  console.log(pass);
+// db.serialize(function() {
+//   db.all('SELECT * FROM Donor WHERE PrimaryID=' + "'" + pass + "'", function(err, rows) {
+//     res.render('name', {
+//       name: pass,
+//       data: rows
+//     });
+//  });
 
-  if (req.body.date) {
+//   db.all('SELECT * FROM Donation WHERE DonorID=' + "'" + pass + "'", function(err, rows) {
+//     console.log(rows)
+//     res.send({donations: rows})
+//     });
+
+});
+
+  app.post('/:id', function(req, res) {
+
+    console.log(pass);
+
+    if (req.body.date) {
       console.log(req.body)
-      db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + pass  + ',' + '"' + req.body.date + '"' + ',' +  req.body.amount + ',' + '"' +  req.body.method + '"' + ')');
+      db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + pass + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
     };
     res.redirect('/')
-});
+  });
 
 });
-
-
 
 //---------------------------------------------------------------------------------------------
-
-
 
 //-----------------------------------------------------------------------------------------------
 
 app.listen(3000);
-
 
