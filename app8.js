@@ -68,33 +68,17 @@ app.get('/:id', function(req, res) {
   var pass = req.params.id;
 
   db.serialize(function() {
-  db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID', function(err, rows) {
+  db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
+    console.log(rows)
     res.render('name', {
       name: pass,
       data: rows
     });
- });
-
-
-// db.serialize(function() {
-//   db.all('SELECT * FROM Donor WHERE PrimaryID=' + "'" + pass + "'", function(err, rows) {
-//     res.render('name', {
-//       name: pass,
-//       data: rows
-//     });
-//  });
-
-//   db.all('SELECT * FROM Donation WHERE DonorID=' + "'" + pass + "'", function(err, rows) {
-//     console.log(rows)
-//     res.send({donations: rows})
-//     });
-
+  });
 });
 
+
   app.post('/:id', function(req, res) {
-
-    console.log(pass);
-
     if (req.body.date) {
       console.log(req.body)
       db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + pass + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
