@@ -16,7 +16,7 @@ app.use(express.static('www'));
 //--------------------------------------------------------------------------------------------
 
 app.get('/home', function(req, res) {
-  res.render('home');
+  res.render('header');
 });
 
 //--------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ app.get('/', function(req, res) {
   db.serialize(function() {
 
     db.all('SELECT * FROM Donor', function(err, rows) {
-      res.render('index2', {
+      res.render('list', {
         data: rows
       });
     });
@@ -83,9 +83,8 @@ app.get('/:id', function(req, res) {
       console.log(req.body)
       db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
     };
-    res.redirect(req.get('referer'))
+    res.redirect(req.get('referer'));
   });
-
 });
 
 //---------------------------------------------------------------------------------------------
