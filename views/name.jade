@@ -4,9 +4,9 @@ html
   head
     link(rel='stylesheet', type='text/css', href='../stylesheet/main.css')
   body
-    h1 #{name}
+    //- h1 #{name}
     h2 Add Donation?
-    form(action='/name',method='post')
+    form(action='/#{name}',method='post')
         div(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='date') date

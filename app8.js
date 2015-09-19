@@ -16,6 +16,7 @@ app.use(express.static('www'));
 //--------------------------------------------------------------------------------------------
 
 app.get('/home', function(req, res) {
+  var pass = '';
   res.render('header');
 });
 
@@ -35,6 +36,7 @@ app.post('/search', function(req, res) {
 //--------------------------------------------------------------------------------------------
 
 app.get('/', function(req, res) {
+  var pass = '';
 
   db.serialize(function() {
 
@@ -49,6 +51,7 @@ app.get('/', function(req, res) {
 //---------------------------------------------------------------------------------------------
 
 app.get('/signup', function(req, res) {
+
   res.render('signup')
 });
 
@@ -64,28 +67,33 @@ app.post('/signup', function(req, res) {
 
 //----------------------------------------------------------------------------------------------
 
-app.get('/:id', function(req, res) {
-  var pass = req.params.id;
+app.get('/:id', function(req, res, next) {
 
-  db.serialize(function() {
+  pass = req.params.id;
+
   db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
-    console.log(rows)
+    // console.log(rows)
     res.render('name', {
       name: pass,
       data: rows
-    });
   });
 });
+      });
 
 
   app.post('/:id', function(req, res) {
+    var pass = req.params.id;
+    console.log(pass)
     if (req.body.date) {
-      console.log(req.body)
+      // console.log(req.body)
       db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
     };
+
     res.redirect(req.get('referer'));
+
   });
-});
+
+
 
 //---------------------------------------------------------------------------------------------
 
