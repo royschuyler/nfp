@@ -1,13 +1,8 @@
 doctype html
 html
+  include ./header.jade
   body
     h1 search
-    div
-      a(href='signup') Add new donor
-    div
-      a(href='/') List all donors
-    div
-      a(href='search') Search donor
     form(action='/search',method='post')
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
