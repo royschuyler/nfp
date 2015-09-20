@@ -1,12 +1,9 @@
-doctype html
-html
-  include ./header.jade
-  body
-    h1 search
-    form(action='/search',method='post')
-      div(data-role='fieldcontain')
-        fieldset(data-role='controlgroup')
-          label(for='search') search
-             input(id='search',type='text',value='',placeholder='',name='search')
-      div(data-role='fieldcontain')
-          input(type='submit',value='search',data-transition='fade', data-theme='c', onkeypress='myFunction()')
+include ./header.jade
+h1 search
+form(action='/search',method='post')
+  div(data-role='fieldcontain')
+    fieldset(data-role='controlgroup')
+      label(for='search') search
+         input(id='search',type='text',value='',placeholder='',name='search')
+  div(data-role='fieldcontain')
+      input(type='submit',value='search',data-transition='fade', data-theme='c', onkeypress='myFunction()')

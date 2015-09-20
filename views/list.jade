@@ -1,26 +1,23 @@
-doctype html
-html
-  include ./header.jade
-  body
-    table(style='width:100%')
-      thead
-        th ID
-        th First Name
-        th Last Name
-        th email
-        th Affiliation
-      tbody
-      -var i = data
-      each value in i
-        tr
-          td=value.PrimaryID
-          td
-            a.data(href=value.PrimaryID) #{value.FirstName}
-          td
-            a.data(href=value.PrimaryID) #{value.LastName}
-          td
-            a.data(href=value.PrimaryID) #{value.email}
-          td
-            a.data(href=value.PrimaryID) #{value.Affiliation}
+include ./header.jade
+table(style='width:100%')
+  thead
+    th ID
+    th First Name
+    th Last Name
+    th email
+    th Affiliation
+  tbody
+  -var i = data
+  each value in i
+    tr
+      td=value.PrimaryID
+      td
+        a.data(href=value.PrimaryID) #{value.FirstName}
+      td
+        a.data(href=value.PrimaryID) #{value.LastName}
+      td
+        a.data(href=value.PrimaryID) #{value.email}
+      td
+        a.data(href=value.PrimaryID) #{value.Affiliation}
 
 
