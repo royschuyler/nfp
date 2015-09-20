@@ -29,18 +29,16 @@ html
         th email
         th Affiliation
       tbody
-      -var i = data
-      each value in i
         tr
-          td=value.PrimaryID
+          td=rows.DonorID
           td
-            a(href=value.PrimaryID) #{value.FirstName}
+            a(href=rows.PrimaryID) #{rows.FirstName}
           td
-            a(href=value.PrimaryID) #{value.LastName}
+            a(href=rows.PrimaryID) #{rows.LastName}
           td
-            a(href=value.PrimaryID) #{value.email}
+            a(href=rows.PrimaryID) #{rows.email}
           td
-            a(href=value.PrimaryID) #{value.Affiliation}
+            a(href=rows.PrimaryID) #{rows.Affiliation}
     table(style='width:100%')
       thead
         th ID
@@ -51,7 +49,7 @@ html
       -var i = data
       each value in i
         tr
-          td #{value.DonorID}
+          td #{value.PrimaryID}
           td #{value.Date}
           td #{value.amount}
           td #{value.method}
