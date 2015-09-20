@@ -30,15 +30,11 @@ html
         th Affiliation
       tbody
         tr
-          td=rows.DonorID
-          td
-            a(href=rows.PrimaryID) #{rows.FirstName}
-          td
-            a(href=rows.PrimaryID) #{rows.LastName}
-          td
-            a(href=rows.PrimaryID) #{rows.email}
-          td
-            a(href=rows.PrimaryID) #{rows.Affiliation}
+          td #{rows.DonorID}
+          td #{rows.FirstName}
+          td #{rows.LastName}
+          td #{rows.email}
+          td #{rows.Affiliation}
     table(style='width:100%')
       thead
         th ID
