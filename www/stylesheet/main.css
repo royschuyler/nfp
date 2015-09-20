@@ -11,8 +11,6 @@ td {
   text-align: center;
 }
 
-
-
 ul {
 list-style-type: none;
 margin: 0;
@@ -24,7 +22,7 @@ li {
 float: left;
 }
 
-a:link, a:visited {
+.header-link:link, .header-link:visited {
 display: block;
 width: 120px;
 font-weight: bold;
@@ -36,6 +34,12 @@ text-decoration: none;
 text-transform: uppercase;
 }
 
-a:hover, a:active {
+.header-link:hover, .header-link:active {
 background-color: #7A991A;
 }
+
+.data {
+  text-decoration: none;
+}
+
+

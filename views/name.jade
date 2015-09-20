@@ -4,6 +4,7 @@ html
   head
     link(rel='stylesheet', type='text/css', href='../stylesheet/main.css')
   body
+    script(type='text/javascript', src='../script/main.js')
     //- h1 #{name}
     h2 Add Donation?
     form(action='/#{name}',method='post')
@@ -23,7 +24,7 @@ html
           input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
     table(style='width:100%')
       thead
-        th ID
+        th P-ID
         th First Name
         th Last Name
         th email
@@ -37,7 +38,7 @@ html
           td #{rows.Affiliation}
     table(style='width:100%')
       thead
-        th ID
+        th D-ID
         th Date of Donation
         th Amount of Donation
         th Method of Donation
