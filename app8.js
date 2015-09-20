@@ -59,6 +59,7 @@ app.post('/signup', function(req, res) {
 
   db.serialize(function() {
     if (req.body.lname) {
+
       db.run('INSERT INTO Donor(FirstName, LastName, email, Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ',' + "'" + req.body.affiliation + "'" + ')');
     };
   });
@@ -71,14 +72,29 @@ app.get('/:id', function(req, res, next) {
 
   pass = req.params.id;
 
+
   db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
-    // console.log(rows)
+
+  if(rows.length != 0) {
     res.render('name', {
       name: pass,
-      data: rows
+      data: rows,
+      rows: rows[0]
+     });
+
+    } else {
+
+      db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+
+        res.render('name', {
+        name: pass,
+        data: rows,
+        rows: rows[0]
+        });
+      });
+    };
   });
 });
-      });
 
 
   app.post('/:id', function(req, res) {
@@ -100,4 +116,3 @@ app.get('/:id', function(req, res, next) {
 //-----------------------------------------------------------------------------------------------
 
 app.listen(3000);
-
