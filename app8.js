@@ -74,12 +74,29 @@ app.get('/:id', function(req, res, next) {
 
 
   db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
-
+// console.log(rows[0].amount)
   if(rows.length != 0) {
+    var arr = [];
+
+    for (var i = 0; i < rows.length; i++) {
+      var num = Number(rows[i].amount)
+      arr.push(num)
+    }
+console.log(arr)
+
+    var total = arr.reduce(function(a, b) {
+      return a + b;
+    });
+
+console.log(total)
+
+
+
     res.render('name', {
       name: pass,
       data: rows,
-      rows: rows[0]
+      rows: rows[0],
+      total: total
      });
 
     } else {
