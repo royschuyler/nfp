@@ -1,4 +1,5 @@
-console.log('hello');
+
+
 
 $(document).ready(function(){
   $('.stroke').on('input', function(e) {
@@ -6,6 +7,14 @@ $(document).ready(function(){
     console.log(stroke);
   });
 });
+
+
+
+
+
+
+
+
 
 
 

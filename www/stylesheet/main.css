@@ -42,4 +42,13 @@ background-color: #7A991A;
   text-decoration: none;
 }
 
+.name-container {
+  width: 45%;
+  border: solid 1px red;
+}
+
+.left {
+  float: right;
+}
+
 
