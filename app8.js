@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
 
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
@@ -12,6 +13,12 @@ var db = new sqlite3.Database('Tester3');
 
 app.set('view engine', 'jade');
 app.use(express.static('www'));
+
+//--------------------------------------------------------------------------------------------
+
+  app.get('/test', function( req, res) {
+    res.render('test')
+  })
 
 //--------------------------------------------------------------------------------------------
 
@@ -82,15 +89,10 @@ app.get('/:id', function(req, res, next) {
       var num = Number(rows[i].amount)
       arr.push(num)
     }
-console.log(arr)
 
     var total = arr.reduce(function(a, b) {
       return a + b;
     });
-
-console.log(total)
-
-
 
     res.render('name', {
       name: pass,
@@ -125,6 +127,8 @@ console.log(total)
     res.redirect(req.get('referer'));
 
   });
+
+
 
 
 
