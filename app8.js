@@ -109,7 +109,7 @@ app.get('/:id/donation', function(req, res, next) {
       return a + b;
     });
 
-    res.render('name', {
+    res.render('donation', {
       name: pass,
       data: rows,
       rows: rows[0],
@@ -120,7 +120,7 @@ app.get('/:id/donation', function(req, res, next) {
 
       db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
 
-        res.render('name', {
+        res.render('donation', {
         name: pass,
         data: rows,
         rows: rows[0]
