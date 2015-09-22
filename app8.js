@@ -84,7 +84,12 @@ app.post('/signup', function(req, res) {
       var name = rows[0].FirstName + ' ' + rows[0].LastName;
       var link = rows[0].PrimaryID;
       console.log(name)
-      res.render('donor', {name: name, link: link, donation: link + '/donation'})
+      res.render('donor',
+       { name: name,
+         link: link,
+         donation: link + '/donation',
+         volunteer: link + '/volunteer'
+       });
     });
   });
 
@@ -148,6 +153,60 @@ app.get('/:id/donation', function(req, res, next) {
 
 
 //---------------------------------------------------------------------------------------------
+
+  app.get('/:id/volunteer', function(req, res, next) {
+
+  pass = req.params.id;
+
+
+  db.all('SELECT * FROM Donor INNER JOIN Volunteer ON Donor.PrimaryID = Volunteer.VolunteerID WHERE Volunteer.VolunteerID =' + "'" + pass + "'", function(err, rows) {
+// console.log(rows[0].amount)
+  if(rows.length != 0) {
+    var arr = [];
+
+    for (var i = 0; i < rows.length; i++) {
+      var num = Number(rows[i].Hours)
+      arr.push(num)
+    }
+
+    var total = arr.reduce(function(a, b) {
+      return a + b;
+    });
+
+    res.render('volunteer', {
+      name: pass,
+      data: rows,
+      rows: rows[0],
+      total: total
+     });
+
+    } else {
+
+      db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+
+        res.render('volunteer', {
+        name: pass,
+        data: rows,
+        rows: rows[0]
+        });
+      });
+    };
+  });
+});
+
+
+  app.post('/:id/volunteer', function(req, res) {
+    var pass = req.params.id;
+    console.log(pass)
+    if (req.body.Hours) {
+      // console.log(req.body)
+      db.run('INSERT INTO Volunteer(VolunteerID, Date, Hours, Department) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.Date + '"' + ',' + req.body.Hours + ',' + '"' + req.body.Department + '"' + ')');
+    };
+
+    res.redirect(req.get('referer'));
+
+  });
+
 
 //-----------------------------------------------------------------------------------------------
 
