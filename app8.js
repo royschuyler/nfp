@@ -30,6 +30,7 @@ app.get('/home', function(req, res) {
 //--------------------------------------------------------------------------------------------
 
 app.get('/search', function(req, res) {
+
   res.render('search')
 
 });
@@ -74,8 +75,22 @@ app.post('/signup', function(req, res) {
 });
 
 //----------------------------------------------------------------------------------------------
+  app.get('/:id', function(req, res) {
 
-app.get('/:id', function(req, res, next) {
+    pass = req.params.id;
+
+    db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+      console.log(rows);
+      var name = rows[0].FirstName + ' ' + rows[0].LastName;
+      var link = rows[0].PrimaryID;
+      console.log(name)
+      res.render('donor', {name: name, link: link, donation: link + '/donation'})
+    });
+  });
+
+
+//----------------------------------------------------------------------------------------------
+app.get('/:id/donation', function(req, res, next) {
 
   pass = req.params.id;
 
@@ -90,7 +105,7 @@ app.get('/:id', function(req, res, next) {
       arr.push(num)
     }
 
-    var total = arr.reduce(function(a, b) {
+    var total = '$' + arr.reduce(function(a, b) {
       return a + b;
     });
 
@@ -116,7 +131,7 @@ app.get('/:id', function(req, res, next) {
 });
 
 
-  app.post('/:id', function(req, res) {
+  app.post('/:id/donation', function(req, res) {
     var pass = req.params.id;
     console.log(pass)
     if (req.body.date) {
