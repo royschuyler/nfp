@@ -22,9 +22,11 @@ app.use(express.static('www'));
 //--------------------------------------------------------------------------------------------
 
 app.get('/search', function(req, res) {
-
-  res.render('search')
-
+  db.all('SELECT DISTINCT Affiliation FROM Donor LIMIT 3', function(err, rows) {
+    // var affiliations = rows;
+    // console.log(affiliations)
+    res.render('search', {affiliations: rows, a: "a", b: "b", c: "c" } )
+  });
 });
 
 //--------------------------------------------------------------------------------------------
@@ -139,10 +141,6 @@ app.get('/:id/donation', function(req, res, next) {
     res.redirect(req.get('referer'));
 
   });
-
-
-
-
 
 //---------------------------------------------------------------------------------------------
 
