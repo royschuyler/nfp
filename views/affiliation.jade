@@ -1,0 +1,27 @@
+include ./header.jade
+div
+  h1 Add Affiliation
+  form(action='/affiliation',method='post')
+    div(data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='aname') Affiliation Name
+           input.name(id='aname',type='text',value='',placeholder='',name='aname')
+    div(data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='fname') Contact First Name
+           input.name(id='fname',type='text',value='',placeholder='',name='fname')
+    div(data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='lname')  Contact Last Name
+           input(id='lname',type='text',value='',placeholder='',name='lname')
+    div(id='hiddendiv',data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='email') Contact Email
+           input(id='email',type='text',value='',placeholder='',name='email')
+    div(id='hiddendiv',data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='phone') Contact Phone
+           input(id='phone',type='text',value='',placeholder='',name='phone')
+    div(data-role='fieldcontain')
+      input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
+include ./footer.jade

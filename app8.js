@@ -17,15 +17,23 @@ app.use(express.static('www'));
 //--------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------
+  app.get('/affiliation', function(req, res) {
+    res.render('affiliation')
+  });
 
+//--------------------------------------------------------------------------------------------
+
+  app.post('/affiliation', function(req, res) {
+    console.log(req.body)
+    db.run("INSERT INTO Affiliation(Name, FirstName, LastName, email, Phone) Values(" + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.email + "'," + "'" + req.body.phone + "'" + ")")
+    res.redirect('/')
+  })
 
 //--------------------------------------------------------------------------------------------
 
 app.get('/search', function(req, res) {
-  db.all('SELECT DISTINCT Affiliation FROM Donor LIMIT 3', function(err, rows) {
-    // var affiliations = rows;
-    // console.log(affiliations)
-    res.render('search', {affiliations: rows, a: "a", b: "b", c: "c" } )
+  db.all('SELECT DISTINCT Affiliation FROM Donor', function(err, rows) {
+    res.render('search', { affiliations: rows } )
   });
 });
 
@@ -53,8 +61,9 @@ app.get('/', function(req, res) {
 //---------------------------------------------------------------------------------------------
 
 app.get('/signup', function(req, res) {
-
-  res.render('signup')
+  db.all('SELECT DISTINCT Affiliation FROM Donor', function(err, rows) {
+    res.render('signup', { affiliations: rows } )
+  });
 });
 
 app.post('/signup', function(req, res) {
