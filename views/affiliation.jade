@@ -24,4 +24,13 @@ div
            input(id='phone',type='tel',value='',placeholder='',name='phone')
     div(data-role='fieldcontain')
       input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
+table(style='width:100%')
+  thead
+    th Affliations
+  tbody
+  -var i = rows
+  each value in i
+    tr
+      td
+        a(href='affiliation/#{value.PrimaryID}') #{value.Name}
 include ./footer.jade

@@ -18,7 +18,10 @@ app.use(express.static('www'));
 
 //--------------------------------------------------------------------------------------------
   app.get('/affiliation', function(req, res) {
-    res.render('affiliation')
+    db.all('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {
+      res.render('affiliation', {rows: rows})
+    })
+
   });
 
 //--------------------------------------------------------------------------------------------
@@ -27,6 +30,12 @@ app.use(express.static('www'));
     console.log(req.body)
     db.run("INSERT INTO Affiliation(Name, FirstName, LastName, email, Phone) Values(" + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.email + "'," + "'" + req.body.phone + "'" + ")")
     res.redirect('/')
+  });
+
+//--------------------------------------------------------------------------------------------
+
+  app.get('affiliation/:id', function(req, res) {
+    console.log(req.body);
   })
 
 //--------------------------------------------------------------------------------------------
