@@ -160,7 +160,6 @@ app.get('/:id/donation', function(req, res, next) {
 
   pass = req.params.id;
 
-
   db.all('SELECT * FROM Donor INNER JOIN Volunteer ON Donor.PrimaryID = Volunteer.VolunteerID WHERE Volunteer.VolunteerID =' + "'" + pass + "'", function(err, rows) {
 // console.log(rows[0].amount)
   if(rows.length != 0) {

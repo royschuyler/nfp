@@ -1,6 +1,7 @@
 include ./header.jade
 div.name-container.left
   h4 Add donation from #{fullName}
+  a(href='/#{pass}') #{fullName}
   form(action='/#{name}/donation',method='post')
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')

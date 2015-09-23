@@ -1,13 +1,14 @@
 h1 {
-  color: blue;
+  color: black;
 }
 
 th {
-  color: orange;
+  color: #2e231f;
+  text-align: center;
 }
 
 td {
-  border: solid 1px gray;
+/*  border: solid 1px gray;*/
   text-align: center;
 }
 

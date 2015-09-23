@@ -1,6 +1,7 @@
 include ./header.jade
 div.name-container.left
-  h2 Add Volunteer?
+  h4 Add Volunteer?
+  a(href='/#{pass}') #{fullName}
   form(action='/#{name}/volunteer',method='post')
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
@@ -15,8 +16,8 @@ div.name-container.left
           label(for='Department') Department
              input(id='method',type='text',value='',placeholder='Kitchen',name='Department')
       div(data-role='fieldcontain')
-        input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
-  table(style='width:100%')
+        input(type='submit',value='Add Hours',data-transition='fade', data-theme='c')
+  table.table-striped.table-condensed.table-bordered(style='width:90%')
     thead
       th First Name
       th Last Name
@@ -28,7 +29,7 @@ div.name-container.left
         td #{rows.LastName}
         td #{rows.email}
         td #{rows.Affiliation}
-  table(style='width:100%')
+  table.table-striped.table-condensed.table-bordered(style='width:90%')
     thead
       th Volunteer Date
       th Hours Worked
@@ -40,7 +41,7 @@ div.name-container.left
         td #{value.Date}
         td #{value.Hours}
         td #{value.Department}
-  table(style='width:100%')
+  table.table-striped.table-condensed.table-bordered(style='width:90%')
     thead
       th Total Hours
     tbody
