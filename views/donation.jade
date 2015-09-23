@@ -1,6 +1,6 @@
 include ./header.jade
 div.name-container.left
-  h2 Add Donation?
+  h4 Add donation from #{fullName}
   form(action='/#{name}/donation',method='post')
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
@@ -18,21 +18,18 @@ div.name-container.left
         input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
   table(style='width:100%')
     thead
-      th P-ID
       th First Name
       th Last Name
       th email
       th Affiliation
     tbody
       tr
-        td #{rows.DonorID}
         td #{rows.FirstName}
         td #{rows.LastName}
         td #{rows.email}
         td #{rows.Affiliation}
   table(style='width:100%')
     thead
-      th D-ID
       th Date of Donation
       th Amount of Donation
       th Method of Donation
@@ -40,7 +37,6 @@ div.name-container.left
     -var i = data
     each value in i
       tr
-        td #{value.PrimaryID}
         td #{value.Date}
         td #{value.amount}
         td #{value.method}
@@ -50,6 +46,6 @@ div.name-container.left
     tbody
       tr
         td #{total}
-        include ./footer.jade
+include ./footer.jade
 
 

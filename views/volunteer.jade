@@ -9,11 +9,11 @@ div.name-container.left
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
           label(for='Hours') Hours
-             input(id='amount',type='text',value='',placeholder='100.00',name='Hours')
+             input(id='amount',type='text',value='',placeholder='5',name='Hours')
       div(id='hiddendiv',data-role='fieldcontain')
         fieldset(data-role='controlgroup')
           label(for='Department') Department
-             input(id='method',type='text',value='',placeholder='check',name='Department')
+             input(id='method',type='text',value='',placeholder='Kitchen',name='Department')
       div(data-role='fieldcontain')
         input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
   table(style='width:100%')
@@ -42,7 +42,7 @@ div.name-container.left
         td #{value.Department}
   table(style='width:100%')
     thead
-      th total donations
+      th Total Hours
     tbody
       tr
         td #{total}

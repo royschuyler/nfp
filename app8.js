@@ -61,7 +61,8 @@ app.get('/', function(req, res) {
 //---------------------------------------------------------------------------------------------
 
 app.get('/signup', function(req, res) {
-  db.all('SELECT DISTINCT Affiliation FROM Donor', function(err, rows) {
+  db.all('SELECT DISTINCT Name FROM Affiliation', function(err, rows) {
+    console.log(rows)
     res.render('signup', { affiliations: rows } )
   });
 });
@@ -118,6 +119,7 @@ app.get('/:id/donation', function(req, res, next) {
     });
 
     res.render('donation', {
+      fullName: rows[0].FirstName + ' ' + rows[0].LastName,
       name: pass,
       data: rows,
       rows: rows[0],
@@ -129,6 +131,7 @@ app.get('/:id/donation', function(req, res, next) {
       db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
 
         res.render('donation', {
+        fullName: rows[0].FirstName + ' ' + rows[0].LastName,
         name: pass,
         data: rows,
         rows: rows[0]
@@ -173,6 +176,7 @@ app.get('/:id/donation', function(req, res, next) {
     });
 
     res.render('volunteer', {
+      fullName: rows[0].FirstName + ' ' + rows[0].LastName,
       name: pass,
       data: rows,
       rows: rows[0],
@@ -184,6 +188,7 @@ app.get('/:id/donation', function(req, res, next) {
       db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
 
         res.render('volunteer', {
+        fullName: rows[0].FirstName + ' ' + rows[0].LastName,
         name: pass,
         data: rows,
         rows: rows[0]

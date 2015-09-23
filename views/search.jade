@@ -4,23 +4,7 @@ select(name='select')
   -var i = affiliations
   each affiliation in affiliations
     option(value=affiliation.Affiliation) #{affiliation.Affiliation}
+include ./footer.jade
 
-
-
-
-
-//- select(name="affiliations")
-//- -var i = affiliations
-//- each affiliation in i
-//-   option(value=affiliation.Affiliation) #{affiliation.Affiliation}
-//-   include ./footer.jade
-
-
-//- form(action='/search',method='post')
-//-   div(data-role='fieldcontain')
-//-     fieldset(data-role='controlgroup')
-//-       label(for='search') search
-//-          input.stroke(id='search',type='text',value='',placeholder='',name='search')
-//-   div(data-role='fieldcontain')
 
 

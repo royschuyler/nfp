@@ -17,8 +17,11 @@ div
     div(id='hiddendiv',data-role='fieldcontain')
       fieldset(data-role='controlgroup')
         label(for='affiliation') affiliation
-           input(id='affiliation',type='text',value='',placeholder='',name='affiliation')
+          select(id='affiliation',type='text',value='',placeholder='',name='affiliation')
+            -var i = affiliations
+            each affiliation in affiliations
+              option(value=affiliation.Name) #{affiliation.Name}
     div(data-role='fieldcontain')
       input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
-      include ./footer.jade
+include ./footer.jade
 
