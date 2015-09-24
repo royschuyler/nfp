@@ -1,11 +1,26 @@
 include ./header.jade
-div.donor-page-divide
-  h1 #{name}
-  p Welcome to #{name}s Nashville Food Project page. Click donation to view donor history or add new donations.
-  p Click volunteer to view volunteer history or add new volunteer hours.
-  div
-    a(href='#{pass}/donation') Add Donations
-  div
-    a(href='#{pass}/volunteer') Add Volunteer Time
+
+div.container
+  div.col-md-4
+  h2.col-md-4 #{name}
+div.container
+  div.col-md-4
+  div.address.col-md-2
+    h4 Address:
+    div #{name}
+    div #{rows.DStreetNumber} #{rows.DStreetName}
+    div #{rows.DCity}, #{rows.DState} #{rows.DZip}
+  div.contact.col-md-2
+    h4 Contact Info:
+    div #{rows.email}
+    div #{rows.Phone}
+div.container.links
+  div.col-md-4
+  p.col-md-2
+    button
+      a(href='#{pass}/donation') Add Donations
+  p.col-md-2
+    button
+      a(href='#{pass}/volunteer') Add Volunteer Time
 include ./footer.jade
 
