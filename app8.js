@@ -21,22 +21,26 @@ app.use(express.static('www'));
     db.all('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {
       res.render('affiliation', {rows: rows})
     })
-
   });
 
 //--------------------------------------------------------------------------------------------
 
   app.post('/affiliation', function(req, res) {
-    console.log(req.body)
-    db.run("INSERT INTO Affiliation(Name, FirstName, LastName, email, Phone) Values(" + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.email + "'," + "'" + req.body.phone + "'" + ")")
-    res.redirect('/')
+    // console.log(req.body)
+    db.run('INSERT INTO Affiliation(Name, CFirstName, CLastName, Cemail, CPhone, StreetNumber, StreetName, City, State, Zip) Values(' + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.Cemail + "'," + "'" + req.body.CPhone + "'," + "'" + req.body.StreetNumber + "'," + "'" + req.body.StreetName + "'," + "'" + req.body.City + "'," + "'" + req.body.State + "'," + "'" + req.body.Zip + "'" + ')')
+    res.redirect('/affiliation')
   });
 
 //--------------------------------------------------------------------------------------------
 
-  app.get('affiliation/:id', function(req, res) {
-    console.log(req.body);
-  })
+
+  app.get('/affiliation/:id', function(req, res) {
+    var pass = req.params.id
+    db.all('SELECT * FROM Affiliation JOIN Donor ON Affiliation.Name = Donor.Affiliation WHERE Affiliation.PrimaryID =' + "'" + pass + "'", function(err, rows) {
+      console.log(rows);
+      res.render('affiliation-id', {rows: rows, data: rows[0]})
+    });
+  });
 
 //--------------------------------------------------------------------------------------------
 
@@ -55,7 +59,6 @@ app.post('/search', function(req, res) {
 //--------------------------------------------------------------------------------------------
 
 app.get('/', function(req, res) {
-  var pass = '';
 
   db.serialize(function() {
 
@@ -71,21 +74,20 @@ app.get('/', function(req, res) {
 
 app.get('/signup', function(req, res) {
   db.all('SELECT DISTINCT Name FROM Affiliation', function(err, rows) {
-    console.log(rows)
+    // console.log(rows)
     res.render('signup', { affiliations: rows } )
   });
 });
 
 app.post('/signup', function(req, res) {
 
-  db.serialize(function() {
-    if (req.body.lname) {
 
-      db.run('INSERT INTO Donor(FirstName, LastName, email, Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'" + ',' + "'" + req.body.affiliation + "'" + ')');
-    };
+      console.log(req.body)
+      db.run('INSERT INTO Donor(FirstName, LastName,email,Phone,DStreetNumber,DStreetName,DCity,DState,DZip,Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'," + "'" + req.body.phone + "',"  +  "'" + req.body.DStreetNumber + "'," + "'" + req.body.DStreetName + "'," + "'" + req.body.DCity + "'," + "'" + req.body.DState + "'," + "'" + req.body.DZip + "'," + "'" + req.body.affiliation + "'" + ')');
+
+    res.redirect('/')
   });
-  res.redirect('/')
-});
+
 
 //----------------------------------------------------------------------------------------------
   app.get('/:id', function(req, res) {
@@ -101,7 +103,8 @@ app.post('/signup', function(req, res) {
        { name: name,
          link: link,
          donation: link + '/donation',
-         volunteer: link + '/volunteer'
+         volunteer: link + '/volunteer',
+         pass: pass
        });
     });
   });
