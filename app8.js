@@ -80,11 +80,8 @@ app.get('/signup', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-
-
       console.log(req.body)
       db.run('INSERT INTO Donor(FirstName, LastName,email,Phone,DStreetNumber,DStreetName,DCity,DState,DZip,Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'," + "'" + req.body.phone + "',"  +  "'" + req.body.DStreetNumber + "'," + "'" + req.body.DStreetName + "'," + "'" + req.body.DCity + "'," + "'" + req.body.DState + "'," + "'" + req.body.DZip + "'," + "'" + req.body.affiliation + "'" + ')');
-
     res.redirect('/')
   });
 
@@ -104,7 +101,8 @@ app.post('/signup', function(req, res) {
          link: link,
          donation: link + '/donation',
          volunteer: link + '/volunteer',
-         pass: pass
+         pass: pass,
+         rows: rows[0]
        });
     });
   });
