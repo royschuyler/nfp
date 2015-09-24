@@ -83,5 +83,18 @@ td {
   margin-top: 10px;
 }
 
+.signup-form {
 
+  text-align: center;
+  border: solid 1px #263c8b;
+}
+
+.under {
+  padding-bottom: 15px;
+  border-bottom: solid 1px #263c8b;
+}
+
+.sign-up-form {
+  padding-top: 10px;
+}
 
