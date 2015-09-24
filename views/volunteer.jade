@@ -6,19 +6,19 @@ div.container
         a(href='/#{pass}') Back to #{fullName}'s contact page
       h3.col-md-3.top-header Add Volunteer Time
     form.donation-form(action='/#{name}/volunteer',method='post')
-        div.col-md-3(data-role='fieldcontain')
+        div.col-md-3.push-down(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='date') date of service
                input(id='date',type='date',value='',placeholder='10/27/1981',name='Date')
-        div.col-md-3(data-role='fieldcontain')
+        div.col-md-3.push-down(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='amount') Hours Worked
                input(id='amount',type='text',value='',placeholder='5',name='Hours')
-        div.col-md-3(id='hiddendiv',data-role='fieldcontain')
+        div.col-md-3.push-down(id='hiddendiv',data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='method') Department
                input(id='method',type='text',value='',placeholder='Garden',name='Department')
-        div.col-md-3.donation-btn(data-role='fieldcontain')
+        div.col-md-3.donation-btn.push-down(data-role='fieldcontain')
           input(type='submit',value='Add Hours',data-transition='fade', data-theme='c')
     h3.col-md-3.col-md-offset-4.vol-title Volunteer History
     table.donation-table.table-bordered.table-striped(style='width:100%')

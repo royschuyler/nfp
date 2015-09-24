@@ -20,13 +20,13 @@ td {
 }
 
 .donation-form {
-  border: solid 1px black;
+  border-top: solid 1px black;
   padding-left: 160px;
   margin-bottom: 75px;
 }
 
 .top-header {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   padding-left: 50px;
 }
 
@@ -62,9 +62,17 @@ td {
   padding: 10px;
 }
 
-/*.both {
-  margin-left: 200px;
-}*/
+.push {
+  margin-top: 30px;
+}
+
+.push-down {
+  margin-top: 10px;
+}
+
+.head-text {
+  padding-left: 200px;
+}
 
 
 
