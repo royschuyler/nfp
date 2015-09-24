@@ -62,7 +62,7 @@ app.get('/', function(req, res) {
 
   db.serialize(function() {
 
-    db.all('SELECT * FROM Donor', function(err, rows) {
+    db.all('SELECT * FROM Donor ORDER BY LastName', function(err, rows) {
       res.render('list', {
         data: rows
       });
@@ -87,25 +87,25 @@ app.post('/signup', function(req, res) {
 
 
 //----------------------------------------------------------------------------------------------
-  app.get('/:id', function(req, res) {
+app.get('/:id', function(req, res) {
 
-    pass = req.params.id;
+  pass = req.params.id;
 
-    db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
-      console.log(rows);
-      var name = rows[0].FirstName + ' ' + rows[0].LastName;
-      var link = rows[0].PrimaryID;
-      console.log(name)
-      res.render('donor',
-       { name: name,
-         link: link,
-         donation: link + '/donation',
-         volunteer: link + '/volunteer',
-         pass: pass,
-         rows: rows[0]
-       });
-    });
+  db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+    console.log(rows);
+    var name = rows[0].FirstName + ' ' + rows[0].LastName;
+    var link = rows[0].PrimaryID;
+    console.log(name)
+    res.render('donor',
+     { name: name,
+       link: link,
+       donation: link + '/donation',
+       volunteer: link + '/volunteer',
+       pass: pass,
+       rows: rows[0]
+     });
   });
+});
 
 
 //----------------------------------------------------------------------------------------------
