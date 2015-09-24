@@ -1,0 +1,20 @@
+include ./header.jade
+div
+  h3 #{data.Name}
+  div.contact-data
+    div Contact: #{data.CFirstName} #{data.CLastName}
+    div Phone: #{data.CPhone}
+    div email: #{data.Cemail}
+    div Address:
+    div #{data.StreetNumber} #{data.StreetName}
+    div #{data.City}, #{data.State} #{data.Zip}
+  table(style='width:100%')
+    thead
+      th Donors/Volunteers
+    tbody
+    -var i = rows
+    each value in i
+      tr
+        td
+          a.data(href='/#{value.PrimaryID}') #{value.FirstName} #{value.LastName}
+include ./footer.jade

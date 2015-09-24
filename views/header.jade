@@ -4,11 +4,14 @@ html
     link(rel='stylesheet', type='text/css', href='../script/bower_components/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='../stylesheet/main.css')
   body
-    ul
-      li
-        a.header-link(href='/signup') Add
-      li
-        a.header-link(href='/') List
-      li
-        a.header-link(href='/affiliation') Affiliation
+    nav.navbar.navbar-default
+      ul.nav.nav-pills
+        li(role='presentation')
+          a.header-link(href='/affiliation') Affiliation
+        li(role='presentation')
+          a.header-link(href='/signup') Add
+        li(role='presentation')
+          a.header-link(href='/') List
+
+
 
