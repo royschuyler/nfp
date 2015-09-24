@@ -15,7 +15,9 @@ app.set('view engine', 'jade');
 app.use(express.static('www'));
 
 //--------------------------------------------------------------------------------------------
-
+  app.get('/home', function(req, res) {
+    res.render('home')
+  })
 //--------------------------------------------------------------------------------------------
   app.get('/affiliation', function(req, res) {
     db.all('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {

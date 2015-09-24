@@ -41,12 +41,12 @@ div.container
              input(id='DZip',type='text',value='',placeholder='Zip',name='DZip')
       div.form-group(id='hiddendiv',data-role='fieldcontain')
         fieldset(data-role='controlgroup')
-          label(for='affiliation') affiliation
+          label(for='affiliation') Affiliation
             select(id='affiliation',type='text',value='',placeholder='',name='affiliation')
               -var i = affiliations
               each affiliation in affiliations
-                option(value=affiliation.Name) #{affiliation.Name}
+                option.select(value=affiliation.Name) #{affiliation.Name}
       div.form-group(data-role='fieldcontain')
-        input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
+        input.btn.form-btn(type='submit',value='Add',data-transition='fade', data-theme='c')
 include ./footer.jade
 
