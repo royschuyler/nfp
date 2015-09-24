@@ -1,20 +1,21 @@
 include ./header.jade
-div
-  h3 #{data.Name}
-  div.contact-data
-    div Contact: #{data.CFirstName} #{data.CLastName}
-    div Phone: #{data.CPhone}
-    div email: #{data.Cemail}
-    div Address:
-    div #{data.StreetNumber} #{data.StreetName}
-    div #{data.City}, #{data.State} #{data.Zip}
-  table(style='width:100%')
-    thead
-      th Donors/Volunteers
-    tbody
-    -var i = rows
-    each value in i
-      tr
-        td
-          a.data(href='/#{value.PrimaryID}') #{value.FirstName} #{value.LastName}
+div.container
+  div.id-container-left.col-md-3.col-md-offset-2
+    h3 #{data.Name}
+    div.contact-data
+      h5 Contact: #{data.CFirstName} #{data.CLastName}
+      h5 Phone: #{data.CPhone}
+      h5 email: #{data.Cemail}
+      h4 Address:
+      h5 #{data.StreetNumber} #{data.StreetName}
+      h5 #{data.City}, #{data.State} #{data.Zip}
+  div.id-container-right.col-md-4
+    table.table-striped.table-bordered.id-container-right(style='width:100%')
+      th Contributors affiliated with #{data.Name}
+        tbody
+        -var i = rows
+        each value in i
+          tr
+            td
+              a.data(href='/#{value.PrimaryID}') #{value.FirstName} #{value.LastName}
 include ./footer.jade

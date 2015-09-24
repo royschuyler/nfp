@@ -48,7 +48,6 @@ td {
 
 .affiliation-form {
   border: solid 1px #263c8b;
-/*  width: 30%;*/
   text-align: center;
 }
 
@@ -78,6 +77,10 @@ td {
 .top-header-donation {
   margin-bottom: 10px;
   padding-left: 70px;
+}
+
+.id-container-right {
+  margin-top: 10px;
 }
 
 
