@@ -1,9 +1,9 @@
 include ./header.jade
 div.container
   div.container.both
-    div.affiliation-form.col-md-5
-      h1.line Add Affiliation
-      form.form-pad(action='/affiliation',method='post')
+    div.affiliation-form.col-md-4
+      h2.line Add Affiliation
+      form.form-pad.form-inline(action='/affiliation',method='post')
         div.form-group(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
             label(for='aname')
@@ -45,7 +45,7 @@ div.container
             label(for='Zip')
                input(id='Zip',type='tel',value='',placeholder='Zip',name='Zip')
         div.form-group(data-role='fieldcontain')
-          input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
+          input.btn.form-btn(type='submit',value='Add',data-transition='fade', data-theme='c')
     div.col-md-5
       table.table-striped.table-bordered(style='width:100%')
         thead

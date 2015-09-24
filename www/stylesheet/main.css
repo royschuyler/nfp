@@ -59,6 +59,8 @@ td {
 
 .form-pad {
   padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .push {
@@ -92,9 +94,29 @@ td {
 .under {
   padding-bottom: 15px;
   border-bottom: solid 1px #263c8b;
+  color: #263c8b;
 }
 
 .sign-up-form {
   padding-top: 10px;
+}
+
+.form-btn {
+  width: 170px;
+  background-color: #263c8b;
+  color: white;
+}
+
+.form-pad {
+  padding-bottom: 20px;
+}
+
+.head-background {
+  background-color: #E6E6E6;
+}
+
+a:hover {
+  color: #522421;
+  text-decoration: none;
 }
 
