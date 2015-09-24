@@ -1,52 +1,45 @@
 include ./header.jade
-div.name-container.left
-  h4 Add donation from #{fullName}
-  a(href='/#{pass}') #{fullName}
-  form(action='/#{name}/donation',method='post')
-      div(data-role='fieldcontain')
-        fieldset(data-role='controlgroup')
-          label(for='date') date
-             input(id='date',type='date',value='',placeholder='10/27/1981',name='date')
-      div(data-role='fieldcontain')
-        fieldset(data-role='controlgroup')
-          label(for='amount') amount
-             input(id='amount',type='text',value='',placeholder='100.00',name='amount')
-      div(id='hiddendiv',data-role='fieldcontain')
-        fieldset(data-role='controlgroup')
-          label(for='method') method of payment
-             input(id='method',type='text',value='',placeholder='check',name='method')
-      div(data-role='fieldcontain')
-        input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
-  table(style='width:100%')
-    thead
-      th First Name
-      th Last Name
-      th email
-      th Affiliation
-    tbody
-      tr
-        td #{rows.FirstName}
-        td #{rows.LastName}
-        td #{rows.email}
-        td #{rows.Affiliation}
-  table(style='width:100%')
-    thead
-      th Date of Donation
-      th Amount of Donation
-      th Method of Donation
-    tbody
-    -var i = data
-    each value in i
-      tr
-        td #{value.Date}
-        td #{value.amount}
-        td #{value.method}
-  table(style='width:100%')
-    thead
-      th total donations
-    tbody
-      tr
-        td #{total}
+div.container
+  div.container
+    div.container
+      h5.col-md-4
+        a(href='/#{pass}') Back to #{fullName}'s contact page
+      h3.col-md-3.top-header Add Donation
+    form.donation-form(action='/#{name}/donation',method='post')
+        div.col-md-3(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='date') date of gift
+               input(id='date',type='date',value='',placeholder='10/27/1981',name='date')
+        div.col-md-3(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='amount') amount
+               input(id='amount',type='text',value='',placeholder='100.00',name='amount')
+        div.col-md-3(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='method') method of payment
+               input(id='method',type='text',value='',placeholder='check',name='method')
+        div.col-md-3.donation-btn(data-role='fieldcontain')
+          input(type='submit',value='Add Donation',data-transition='fade', data-theme='c')
+      h3.col-md-3.col-md-offset-4.title Donation History
+    table.donation-table.table-bordered.table-striped(style='width:100%')
+      thead
+        th Date of Donation
+        th Amount of Donation
+        th Method of Donation
+      tbody
+      -var i = data
+      each value in i
+        tr
+          td #{value.Date}
+          td #{value.amount}
+          td #{value.method}
+    table(style='width:95%')
+      thead
+        th total donations
+      tbody
+        tr
+          td #{total}
+
 include ./footer.jade
 
 
