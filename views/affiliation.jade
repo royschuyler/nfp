@@ -1,56 +1,59 @@
 include ./header.jade
-div
-  h1 Add Affiliation
-  form(action='/affiliation',method='post')
-    div(data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='aname') Affiliation Name
-           input.name(id='aname',type='text',value='',placeholder='',name='aname')
-    div(data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='fname') Contact First Name
-           input.name(id='fname',type='text',value='',placeholder='',name='fname')
-    div(data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='lname')  Contact Last Name
-           input(id='lname',type='text',value='',placeholder='',name='lname')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='email') Contact Email
-           input(id='Cemail',type='Cemail',value='',placeholder='',name='Cemail')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='CPhone') Contact Phone
-           input(id='CPhone',type='tel',value='',placeholder='',name='CPhone')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='StreetNumber') Street Number
-           input(id='StreetNumber',type='tel',value='',placeholder='',name='StreetNumber')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='StreetName') Street Name
-           input(id='StreetName',type='tel',value='',placeholder='',name='StreetName')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='City') City
-           input(id='City',type='tel',value='',placeholder='',name='City')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='State') State
-           input(id='State',type='tel',value='',placeholder='',name='State')
-    div(id='hiddendiv',data-role='fieldcontain')
-      fieldset(data-role='controlgroup')
-        label(for='Zip') Zip
-           input(id='Zip',type='tel',value='',placeholder='',name='Zip')
-    div(data-role='fieldcontain')
-      input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
-table(style='width:100%')
-  thead
-    th Affliations
-  tbody
-  -var i = rows
-  each value in i
-    tr
-      td
-        a(href='affiliation/#{value.PrimaryID}') #{value.Name}
+div.container
+  div.container.both
+    div.affiliation-form.col-md-5
+      h1.line Add Affiliation
+      form.form-pad(action='/affiliation',method='post')
+        div.form-group(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='aname') Affiliation Name
+               input.name(id='aname',type='text',value='',placeholder='',name='aname')
+        div.form-group(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='fname') Contact First Name
+               input.name(id='fname',type='text',value='',placeholder='',name='fname')
+        div.form-group(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='lname')  Contact Last Name
+               input(id='lname',type='text',value='',placeholder='',name='lname')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='email') Contact Email
+               input(id='Cemail',type='Cemail',value='',placeholder='',name='Cemail')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='CPhone') Contact Phone
+               input(id='CPhone',type='tel',value='',placeholder='',name='CPhone')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='StreetNumber') Street Number
+               input(id='StreetNumber',type='tel',value='',placeholder='',name='StreetNumber')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='StreetName') Street Name
+               input(id='StreetName',type='tel',value='',placeholder='',name='StreetName')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='City') City
+               input(id='City',type='tel',value='',placeholder='',name='City')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='State') State
+               input(id='State',type='tel',value='',placeholder='',name='State')
+        div.form-group(id='hiddendiv',data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='Zip') Zip
+               input(id='Zip',type='tel',value='',placeholder='',name='Zip')
+        div.form-group(data-role='fieldcontain')
+          input.btn(type='submit',value='Add',data-transition='fade', data-theme='c')
+    div.col-md-5
+      table.table-striped.table-bordered(style='width:100%')
+        thead
+          th Affliations
+        tbody
+        -var i = rows
+        each value in i
+          tr
+            td
+              a(href='affiliation/#{value.PrimaryID}') #{value.Name}
 include ./footer.jade

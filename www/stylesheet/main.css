@@ -46,6 +46,25 @@ td {
   padding-left: 79px;
 }
 
+.affiliation-form {
+  border: solid 1px #263c8b;
+/*  width: 30%;*/
+  text-align: center;
+}
+
+.line {
+  border-bottom: solid 1px #263c8b;
+  padding-bottom: 15px;
+  color: #263c8b;
+}
+
+.form-pad {
+  padding: 10px;
+}
+
+/*.both {
+  margin-left: 200px;
+}*/
 
 
 
