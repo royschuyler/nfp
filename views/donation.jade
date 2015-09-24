@@ -4,7 +4,7 @@ div.container
     div.container
       h5.col-md-4
         a(href='/#{pass}') Back to #{fullName}'s contact page
-      h3.col-md-3.top-header Add Donation
+      h3.col-md-3.top-header-donation Add Donation
     form.donation-form(action='/#{name}/donation',method='post')
         div.col-md-3.push-down(data-role='fieldcontain')
           fieldset(data-role='controlgroup')
@@ -38,7 +38,7 @@ div.container
         th Total Donations
       tbody
         tr
-          td #{total}
+          td.border #{total}
 
 include ./footer.jade
 
