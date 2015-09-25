@@ -16,9 +16,36 @@ app.use(express.static('www'));
 
 //--------------------------------------------------------------------------------------------
   app.get('/home', function(req, res) {
+    // db.('SELECT * From Donation WHERE Date BETWEEN' + "'" + req.body.Date1 + "'"  + 'AND' + "'" + req.body.Date2 + "'",
     res.render('home')
-  })
+  });
+
 //--------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------
+  app.post('/home', function(req, res) {
+    // console.log(req.body)
+    var date1 = req.body.date1 + 'e' + req.body.date2
+    var date2 = req.body.date2
+
+     db.run('INSERT INTO Query(Date1, Date2)VALUES(' + "'" + date1 + "'," + "'" + date2 + "'" + ')');
+
+     res.redirect('/home/' + date1)
+  });
+//--------------------------------------------------------------------------------------------
+
+  app.get('/home/:id', function(req, res) {
+    var id = req.params.id;
+    var split = id.split('e');
+    console.log(split)
+
+    console.log(split[0])
+    console.log(split[1])
+
+    res.render('home-query')
+  });
+//--------------------------------------------------------------------------------------------
+
   app.get('/affiliation', function(req, res) {
     db.all('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {
       res.render('affiliation', {rows: rows})
