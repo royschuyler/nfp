@@ -73,7 +73,7 @@ td {
 
 .head-text {
   padding-top: 5px;
-  padding-left: 145px;
+  padding-left: 98px;
 }
 
 .top-header-donation {
@@ -129,7 +129,15 @@ a:hover {
   margin: 10px;
 }
 
-.center-signup
+.query-form {
+  padding left: 40px;
+}
 
+.query-new {
+  text-align: center;
+}
 
+.toppy {
+  padding-top: 75px;
+}
 
