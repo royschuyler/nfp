@@ -62,8 +62,9 @@ app.use(express.static('www'));
     var date2 = split[1];
     db.all('SELECT * From Donation JOIN Donor ON Donation.DonorID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
       console.log(rows)
+      res.render('donation-query-id', {data: rows, date: date1 + ' and ' + date2})
     });
-    res.render('donation-query')
+
   });
 //--------------------------------------------------------------------------------------------
 
@@ -74,8 +75,8 @@ app.use(express.static('www'));
     var date2 = split[1];
     db.all('SELECT * From Volunteer JOIN Donor ON Volunteer.VolunteerID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
       console.log(rows)
+      res.render('volunteer-query-id', {data: rows, date: date1 + ' and ' + date2})
     });
-    res.render('volunteer-query')
   });
 //--------------------------------------------------------------------------------------------
 

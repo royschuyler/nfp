@@ -1,4 +1,8 @@
 include ./header.jade
-a(href='/donation-query') custom donation list
-a(href='/volunteer-query') custom volunteer list
+div.container
+  div.col-md-3.col-md-offset-5
+    button.query-btn
+     a(href='/donation-query') Find donations by date
+    button.query-btn
+     a(href='/volunteer-query') Find volunteers by date
 include ./footer.jade

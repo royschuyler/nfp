@@ -1,4 +1,25 @@
 include ./header.jade
-h1 vol-qu
+h3.query-head Here are all of the Volunteers between #{date}
+table.table-striped.table-bordered(style='width:100%')
+  thead
+    th First Name
+    th Last Name
+    th email
+    th Date
+    th Hours
+  tbody
+  -var i = data
+  each value in i
+    tr
+      td
+        a.data(href='/'+value.PrimaryID) #{value.FirstName}
+      td
+        a.data(href='/'+value.PrimaryID) #{value.LastName}
+      td
+        a.data(href='/'+value.PrimaryID) #{value.email}
+      td
+        a.data(href='/'+value.PrimaryID) #{value.Date}
+      td
+        a.data(href='/'+value.PrimaryID) #{value.Hours}
 
 include ./footer.jade
