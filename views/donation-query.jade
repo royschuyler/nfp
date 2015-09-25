@@ -1,0 +1,15 @@
+include ./header.jade
+h1 don
+div.container
+  form.form-horizontal(action='/donation-query',method='post')
+      div.form-group(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+          label(for='date') Date 1
+             input(id='date',type='date',value='',placeholder='10/27/1981',name='date1')
+      div.form-group(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+          label(for='date') Date 2
+             input(id='date',type='date',value='',placeholder='10/27/1981',name='date2')
+      div.form-group(data-role='fieldcontain')
+        input(type='submit',value='Get List',data-transition='fade', data-theme='c')
+include ./footer.jade

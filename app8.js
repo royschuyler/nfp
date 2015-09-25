@@ -14,35 +14,68 @@ var db = new sqlite3.Database('Tester3');
 app.set('view engine', 'jade');
 app.use(express.static('www'));
 
+
 //--------------------------------------------------------------------------------------------
   app.get('/home', function(req, res) {
-    // db.('SELECT * From Donation WHERE Date BETWEEN' + "'" + req.body.Date1 + "'"  + 'AND' + "'" + req.body.Date2 + "'",
     res.render('home')
   });
-
+//--------------------------------------------------------------------------------------------
+  app.get('/donation-query', function(req, res) {
+    res.render('donation-query')
+  });
 //--------------------------------------------------------------------------------------------
 
+  app.get('/volunteer-query', function(req, res) {
+    res.render('volunteer-query')
+  });
 //--------------------------------------------------------------------------------------------
-  app.post('/home', function(req, res) {
-    // console.log(req.body)
+
+
+
+//--------------------------------------------------------------------------------------------
+  app.post('/donation-query', function(req, res) {
+
     var date1 = req.body.date1 + 'e' + req.body.date2
     var date2 = req.body.date2
 
-     db.run('INSERT INTO Query(Date1, Date2)VALUES(' + "'" + date1 + "'," + "'" + date2 + "'" + ')');
+     //db.run('INSERT INTO Query(Date1, Date2)VALUES(' + "'" + date1 + "'," + "'" + date2 + "'" + ')');
 
-     res.redirect('/home/' + date1)
+     res.redirect('/donation-query/' + date1)
+  });
+
+//--------------------------------------------------------------------------------------------
+  app.post('/volunteer-query', function(req, res) {
+
+    var date1 = req.body.date1 + 'e' + req.body.date2
+    var date2 = req.body.date2
+
+     //db.run('INSERT INTO Query(Date1, Date2)VALUES(' + "'" + date1 + "'," + "'" + date2 + "'" + ')');
+
+     res.redirect('/volunteer-query/' + date1)
   });
 //--------------------------------------------------------------------------------------------
 
-  app.get('/home/:id', function(req, res) {
+  app.get('/donation-query/:id', function(req, res) {
     var id = req.params.id;
     var split = id.split('e');
-    console.log(split)
+    var date1 = split[0];
+    var date2 = split[1];
+    db.all('SELECT * From Donation JOIN Donor ON Donation.DonorID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
+      console.log(rows)
+    });
+    res.render('donation-query')
+  });
+//--------------------------------------------------------------------------------------------
 
-    console.log(split[0])
-    console.log(split[1])
-
-    res.render('home-query')
+  app.get('/volunteer-query/:id', function(req, res) {
+    var id = req.params.id;
+    var split = id.split('e');
+    var date1 = split[0];
+    var date2 = split[1];
+    db.all('SELECT * From Volunteer JOIN Donor ON Volunteer.VolunteerID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
+      console.log(rows)
+    });
+    res.render('volunteer-query')
   });
 //--------------------------------------------------------------------------------------------
 
