@@ -8,12 +8,28 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('Tester3');
+// var sqlite3 = require('sqlite3');
+// var db = new sqlite3.Database('Tester3');
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'Hollie12123',
+  database : 'test3'
+});
 
 app.set('view engine', 'jade');
 app.use(express.static('www'));
 
+//--------------------------------------------------------------------------------------------
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... \n\n");
+} else {
+    console.log("Error connecting database ... \n\n");
+}
+});
 
 //--------------------------------------------------------------------------------------------
 app.get('/test', function(req, res) {
@@ -65,7 +81,7 @@ app.get('/test', function(req, res) {
     var split = id.split('e');
     var date1 = split[0];
     var date2 = split[1];
-    db.all('SELECT * From Donation JOIN Donor ON Donation.DonorID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
+    connection.query('SELECT * From Donation JOIN Donor ON Donation.DonorID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
       console.log(rows)
       res.render('donation-query-id', {data: rows, date: date1 + ' and ' + date2})
     });
@@ -78,7 +94,7 @@ app.get('/test', function(req, res) {
     var split = id.split('e');
     var date1 = split[0];
     var date2 = split[1];
-    db.all('SELECT * From Volunteer JOIN Donor ON Volunteer.VolunteerID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
+    connection.query('SELECT * From Volunteer JOIN Donor ON Volunteer.VolunteerID = Donor.PrimaryID WHERE Date BETWEEN' + "'" + date1 + "'"  + 'AND' + "'" + date2 + "'", function(err, rows) {
       console.log(rows)
       res.render('volunteer-query-id', {data: rows, date: date1 + ' and ' + date2})
     });
@@ -88,7 +104,7 @@ app.get('/test', function(req, res) {
 //**********************************************************************************************
 
   app.get('/affiliation', function(req, res) {
-    db.all('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {
+    connection.query('SELECT Name, PrimaryID FROM Affiliation', function(err, rows) {
       res.render('affiliation', {rows: rows})
     })
   });
@@ -97,7 +113,7 @@ app.get('/test', function(req, res) {
 
   app.post('/affiliation', function(req, res) {
     // console.log(req.body)
-    db.run('INSERT INTO Affiliation(Name, CFirstName, CLastName, Cemail, CPhone, StreetNumber, StreetName, City, State, Zip) Values(' + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.Cemail + "'," + "'" + req.body.CPhone + "'," + "'" + req.body.StreetNumber + "'," + "'" + req.body.StreetName + "'," + "'" + req.body.City + "'," + "'" + req.body.State + "'," + "'" + req.body.Zip + "'" + ')')
+    connection.query('INSERT INTO Affiliation(Name, CFirstName, CLastName, Cemail, CPhone, StreetNumber, StreetName, City, State, Zip) Values(' + "'" + req.body.aname + "'," + "'" + req.body.fname + "'," + "'" + req.body.lname + "'," + "'" + req.body.Cemail + "'," + "'" + req.body.CPhone + "'," + "'" + req.body.StreetNumber + "'," + "'" + req.body.StreetName + "'," + "'" + req.body.City + "'," + "'" + req.body.State + "'," + "'" + req.body.Zip + "'" + ')')
     res.redirect('/affiliation')
   });
 
@@ -106,7 +122,7 @@ app.get('/test', function(req, res) {
 
   app.get('/affiliation/:id', function(req, res) {
     var pass = req.params.id
-    db.all('SELECT * FROM Affiliation JOIN Donor ON Affiliation.Name = Donor.Affiliation WHERE Affiliation.PrimaryID =' + "'" + pass + "'", function(err, rows) {
+    connection.query('SELECT * FROM Affiliation JOIN Donor ON Affiliation.Name = Donor.Affiliation WHERE Affiliation.PrimaryID =' + "'" + pass + "'", function(err, rows) {
       console.log(rows);
       res.render('affiliation-id', {rows: rows, data: rows[0]})
     });
@@ -115,7 +131,7 @@ app.get('/test', function(req, res) {
 //--------------------------------------------------------------------------------------------
 
 app.get('/search', function(req, res) {
-  db.all('SELECT DISTINCT Affiliation FROM Donor', function(err, rows) {
+  connection.query('SELECT DISTINCT Affiliation FROM Donor', function(err, rows) {
     res.render('search', { affiliations: rows } )
   });
 });
@@ -130,12 +146,9 @@ app.post('/search', function(req, res) {
 
 app.get('/', function(req, res) {
 
-  db.serialize(function() {
-
-    db.all('SELECT * FROM Donor ORDER BY LastName', function(err, rows) {
+    connection.query('SELECT * FROM Donor ORDER BY LastName', function(err, rows) {
       res.render('list', {
         data: rows
-      });
     });
   });
 });
@@ -143,7 +156,7 @@ app.get('/', function(req, res) {
 //---------------------------------------------------------------------------------------------
 
 app.get('/signup', function(req, res) {
-  db.all('SELECT DISTINCT Name FROM Affiliation', function(err, rows) {
+  connection.query('SELECT DISTINCT Name FROM Affiliation', function(err, rows) {
     // console.log(rows)
     res.render('signup', { affiliations: rows } )
   });
@@ -151,7 +164,7 @@ app.get('/signup', function(req, res) {
 
 app.post('/signup', function(req, res) {
       console.log(req.body)
-      db.run('INSERT INTO Donor(FirstName, LastName,email,Phone,DStreetNumber,DStreetName,DCity,DState,DZip,Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'," + "'" + req.body.phone + "',"  +  "'" + req.body.DStreetNumber + "'," + "'" + req.body.DStreetName + "'," + "'" + req.body.DCity + "'," + "'" + req.body.DState + "'," + "'" + req.body.DZip + "'," + "'" + req.body.affiliation + "'" + ')');
+      connection.query('INSERT INTO Donor(FirstName, LastName,email,Phone,DStreetNumber,DStreetName,DCity,DState,DZip,Affiliation) VALUES(' + "'" + req.body.fname + "'" + ',' + "'" + req.body.lname + "'" + ',' + "'" + req.body.email + "'," + "'" + req.body.phone + "',"  +  "'" + req.body.DStreetNumber + "'," + "'" + req.body.DStreetName + "'," + "'" + req.body.DCity + "'," + "'" + req.body.DState + "'," + "'" + req.body.DZip + "'," + "'" + req.body.affiliation + "'" + ')');
     res.redirect('/')
   });
 
@@ -161,7 +174,7 @@ app.get('/:id', function(req, res) {
 
   pass = req.params.id;
 
-  db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+  connection.query('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
     console.log(rows);
     var name = rows[0].FirstName + ' ' + rows[0].LastName;
     var link = rows[0].PrimaryID;
@@ -184,7 +197,7 @@ app.get('/:id/donation', function(req, res, next) {
   pass = req.params.id;
 
 
-  db.all('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
+  connection.query('SELECT * FROM Donor INNER JOIN Donation ON Donor.PrimaryID = Donation.DonorID WHERE Donation.DonorID =' + "'" + pass + "'", function(err, rows) {
 // console.log(rows[0].amount)
   if(rows.length != 0) {
     var arr = [];
@@ -208,7 +221,7 @@ app.get('/:id/donation', function(req, res, next) {
 
     } else {
 
-      db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+      connection.query('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
 
         res.render('donation', {
         fullName: rows[0].FirstName + ' ' + rows[0].LastName,
@@ -227,7 +240,7 @@ app.get('/:id/donation', function(req, res, next) {
     console.log(pass)
     if (req.body.date) {
       // console.log(req.body)
-      db.run('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
+      connection.query('INSERT INTO Donation(DonorID, Date, amount, method) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.date + '"' + ',' + req.body.amount + ',' + '"' + req.body.method + '"' + ')');
     };
 
     res.redirect(req.get('referer'));
@@ -240,7 +253,7 @@ app.get('/:id/donation', function(req, res, next) {
 
   pass = req.params.id;
 
-  db.all('SELECT * FROM Donor INNER JOIN Volunteer ON Donor.PrimaryID = Volunteer.VolunteerID WHERE Volunteer.VolunteerID =' + "'" + pass + "'", function(err, rows) {
+  connection.query('SELECT * FROM Donor INNER JOIN Volunteer ON Donor.PrimaryID = Volunteer.VolunteerID WHERE Volunteer.VolunteerID =' + "'" + pass + "'", function(err, rows) {
 // console.log(rows[0].amount)
   if(rows.length != 0) {
     var arr = [];
@@ -264,7 +277,7 @@ app.get('/:id/donation', function(req, res, next) {
 
     } else {
 
-      db.all('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
+      connection.query('SELECT * FROM Donor WHERE PrimaryID =' + "'" + pass + "'", function(err, rows) {
 
         res.render('volunteer', {
         fullName: rows[0].FirstName + ' ' + rows[0].LastName,
@@ -283,7 +296,7 @@ app.get('/:id/donation', function(req, res, next) {
     console.log(pass)
     if (req.body.Hours) {
       // console.log(req.body)
-      db.run('INSERT INTO Volunteer(VolunteerID, Date, Hours, Department) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.Date + '"' + ',' + req.body.Hours + ',' + '"' + req.body.Department + '"' + ')');
+      connection.query('INSERT INTO Volunteer(VolunteerID, Date, Hours, Department) VALUES(' + "'" + pass + "'" + ',' + '"' + req.body.Date + '"' + ',' + req.body.Hours + ',' + '"' + req.body.Department + '"' + ')');
     };
 
     res.redirect(req.get('referer'));
