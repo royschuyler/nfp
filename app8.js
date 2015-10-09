@@ -8,8 +8,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-// var sqlite3 = require('sqlite3');
-// var db = new sqlite3.Database('Tester3');
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
